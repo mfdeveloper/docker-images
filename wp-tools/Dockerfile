@@ -1,7 +1,7 @@
+FROM php:7.2-alpine
 LABEL maintainer="Michel Felipe<mfelipeof@gmail.com>" \
 	  description="PHP tools to use in wordpress installations for development environments" \
-	  version="1.0"
-FROM php:7.2-alpine
+	  version="1.0-php7.2-alpine"
 
 # Installing Composer dependencies
 RUN apk --no-cache add git subversion openssh mercurial tini bash patch
@@ -45,8 +45,8 @@ RUN apk add --update --no-cache \
 		unzip 
 
 RUN set -ex; \
-	mkdir -p /var/www/html
-	chmod 777 -R /var/www/html
+	mkdir -p /var/www/html; \
+	chmod -R 777 /var/www/html
 	# chown -R www-data:www-data /var/www/html
 WORKDIR /var/www/html
 

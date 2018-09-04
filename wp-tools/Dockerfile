@@ -65,6 +65,8 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME ${HOME}/.composer
 ENV COMPOSER_VERSION 1.6.5
 
+ENV PHPUNIT_VERSION 6
+
 RUN set -ex; \
 	\
 	apk add --no-cache --virtual .fetch-deps \
@@ -109,7 +111,7 @@ RUN curl -s -f -L -k -o /tmp/installer.php https://raw.githubusercontent.com/com
 ENV PATH "${PATH}:${COMPOSER_HOME}/vendor/bin"
 
 # Installing Tools (PHPUnit, PHP Code Sniffer, WordPress-Coding-Standards)
-RUN composer global require phpunit/phpunit ^7
+RUN composer global require phpunit/phpunit ^"${PHPUNIT_VERSION}"
 RUN composer global require squizlabs/php_codesniffer
 RUN composer global require dealerdirect/phpcodesniffer-composer-installer
 RUN composer global require wp-coding-standards/wpcs

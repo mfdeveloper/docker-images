@@ -4,7 +4,7 @@ PHP tools to use in wordpress installations for development environments
 
 ## Supported tags
 
-- 1.0-php7.2-alpine
+- [1.0-php7.2-alpine](https://github.com/mfdeveloper/docker-images/tree/1.0-php7.2-alpine)
 
 ## Tools
 
@@ -35,7 +35,7 @@ docker run \
        -v "$HOME":"$HOME":ro \
        -u $(id -u) \
        -w "$PWD" \
-       wordpress-tools:1.0-php7.2-alpine composer "$@"
+       mfdeveloper/wordpress-tools:1.0-php7.2-alpine composer "$@"
 
 exit $?
 ```
@@ -66,7 +66,7 @@ docker run --rm -i wordpress-tools composer [any-action-here]
             - wp-code:/var/www/html
             - ./wp-content:/var/www/html/wp-content
     wp-tools:
-        image: wordpress-tools
+        image: mfdeveloper/wordpress-tools
         depends_on:
             - wordpress
         volumes:

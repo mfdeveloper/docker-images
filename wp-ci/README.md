@@ -8,7 +8,7 @@ A [wordpress image](https://hub.docker.com/_/wordpress/) + [php tools](../wp-too
 
 ## Tools
 
-
+ - [Dockerize](https://github.com/jwilder/dockerize)
  - [PHP 7.2](https://hub.docker.com/_/php/)
  - [Composer](https://getcomposer.org/)
  - [PHPUnit](https://phpunit.de/)

@@ -5,8 +5,15 @@ LABEL maintainer="Michel Felipe<mfelipeof@gmail.com>" \
 	  description="A wordpress image + php tools to run plugin configs and phpunit tests, in a CI or local development/tests" \
 	  version="$WORDPRESS_VERSION"
 
+ENV DOCKERIZE_VERSION v0.6.1
+
 # Installing Composer dependencies
-RUN apk --no-cache add git subversion openssh mercurial tini bash patch
+RUN apk --no-cache add git subversion openssh openssl mercurial tini bash patch
+
+# Installing dockerize
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
  && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > "$PHP_INI_DIR/conf.d/date_timezone.ini"

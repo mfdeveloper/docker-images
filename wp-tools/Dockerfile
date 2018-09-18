@@ -67,6 +67,20 @@ ENV COMPOSER_VERSION 1.6.5
 
 ENV PHPUNIT_VERSION 6
 
+ENV XDEBUG_PORT 9000
+ENV XDEBUG_VERSION 2.6.0
+ENV XDEBUG_IDEKEY docker
+
+# Installing Xdebug (e.g for debug composer custom scripts)
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \ 
+  && pecl install "xdebug-${XDEBUG_VERSION}" \
+  && docker-php-ext-enable xdebug \
+  && apk del pcre-dev ${PHPIZE_DEPS}
+
+RUN echo "xdebug.remote_enable=1" >> "$PHP_INI_DIR/conf.d/xdebug.ini &&" \
+	echo "xdebug.remote_connect_back=1" >> "$PHP_INI_DIR/conf.d/xdebug.ini &&" \
+	echo "xdebug.idekey=${XDEBUG_IDEKEY}" >> "$PHP_INI_DIR/conf.d/xdebug.ini"
+
 RUN set -ex; \
 	\
 	apk add --no-cache --virtual .fetch-deps \
